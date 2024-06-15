@@ -1,19 +1,18 @@
-import { Libre_Franklin, Merriweather_Sans } from 'next/font/google'
-import { Judson } from 'next/font/google'
-import { Metadata } from 'next';
+import { Libre_Franklin, Merriweather_Sans } from "next/font/google";
+import { Metadata } from "next";
 import "./globals.css";
-import Header from './Header';
-import Footer from './Footer';
+import Header from "./Header";
+import Footer from "./Footer";
 
 const libre_franklin = Libre_Franklin({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-libre_franklin',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-libre_franklin",
 });
 const judson = Merriweather_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-judson',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-judson",
 });
 
 export const metadata: Metadata = {
@@ -28,10 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={libre_franklin.variable + ' ' + judson.variable}>
+      <body className={libre_franklin.variable + " " + judson.variable}>
         <Header />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
