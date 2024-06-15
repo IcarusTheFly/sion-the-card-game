@@ -1,8 +1,20 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Libre_Franklin, Merriweather_Sans } from 'next/font/google'
+import { Judson } from 'next/font/google'
+import { Metadata } from 'next';
 import "./globals.css";
+import Header from './Header';
+import Footer from './Footer';
 
-const inter = Inter({ subsets: ["latin"] });
+const libre_franklin = Libre_Franklin({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-libre_franklin',
+});
+const judson = Merriweather_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-judson',
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +28,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={libre_franklin.variable + ' ' + judson.variable}>
+        <Header />
+        {children}
+        <Footer/>
+      </body>
     </html>
   );
 }
