@@ -2,11 +2,10 @@
 
 import { Button } from "@nextui-org/button";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
-
-import rawCardList from "./rawCardList.json";
 import Link from "next/link";
+import GetCards from "../db/GetCards";
 
 type CardTypeStrings = {
   title: string;
@@ -65,8 +64,6 @@ function isCardTypeExtendedKeyBoolean(
 }
 
 export default function Cards() {
-  // TO-DO: Load images in .bmp format!
-  const cardsRawList: CardTypeExtended[] = useMemo(() => rawCardList, []);
   const cardVariant = {
     visible: {
       opacity: 1,
@@ -97,6 +94,15 @@ export default function Cards() {
   const [sortByFilter, setSortByFilter] = useState(
     Array.from(sortByFilterList.keys())[0]
   );
+
+  const [cardsRawList, setCardsRawList] = useState<CardTypeExtended[]>([]);
+  // TO-DO: Play with useMemo and useCallback
+  useEffect(() => {
+    // Collect the cards from the DB
+    GetCards().then((cards) => {
+      setCardsRawList(cards as CardTypeExtended[]);
+    });
+  }, []);
   const [cardList, setCardList] = useState(
     cardsRawList.toSorted((a: CardTypeExtended, b: CardTypeExtended) =>
       a.name.localeCompare(b.name)
@@ -110,28 +116,38 @@ export default function Cards() {
         return true;
       }
 
-      for (const key in cardTypeStringsKeys) {
-        if (
-          card[key as keyof CardTypeStrings]
-            .toLowerCase()
-            .includes(searchByFilter.toLowerCase())
-        ) {
-          return true;
+      try {
+        for (const key in cardTypeStringsKeys) {
+          if (
+            card[key as keyof CardTypeStrings]
+              .toLowerCase()
+              .includes(searchByFilter.toLowerCase())
+          ) {
+            return true;
+          }
         }
+      } catch (error) {
+        console.error("Error searching cards:", error);
+        return false;
       }
       return false;
     });
 
     const sortedCardList: CardTypeExtended[] = filteredCardList.toSorted(
       (a: CardTypeExtended, b: CardTypeExtended) => {
-        if (isCardTypeExtendedKeyString(sortByFilter)) {
-          return a[sortByFilter].localeCompare(b[sortByFilter]);
-        } else if (isCardTypeExtendedKeyBoolean(sortByFilter)) {
-          return a[sortByFilter] === b[sortByFilter]
-            ? 0
-            : a[sortByFilter]
-            ? -1
-            : 1;
+        try {
+          if (isCardTypeExtendedKeyString(sortByFilter)) {
+            return a[sortByFilter].localeCompare(b[sortByFilter]);
+          } else if (isCardTypeExtendedKeyBoolean(sortByFilter)) {
+            return a[sortByFilter] === b[sortByFilter]
+              ? 0
+              : a[sortByFilter]
+              ? -1
+              : 1;
+          }
+        } catch (error) {
+          console.error("Error sortingcards:", error);
+          return 0;
         }
         return a.name.localeCompare(b.name);
       }
@@ -189,6 +205,7 @@ export default function Cards() {
             </div>
           </div>
 
+          {/* TO-DO: Load images in a compressed format */}
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
             {cardList.map((item) => {
               return (

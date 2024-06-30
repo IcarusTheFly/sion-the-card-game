@@ -1,12 +1,12 @@
 "use client";
 
 import { Button } from "@nextui-org/button";
+import { useEffect, useState } from "react";
 // import { motion } from "framer-motion";
 import classNames from "classnames";
 import Image from "next/image";
-
-import rawCardList from "../rawCardList.json";
 import Link from "next/link";
+import GetCardByColNumber from "../../db/GetCardByColNumber";
 
 type CardTypeStrings = {
   title: string;
@@ -58,16 +58,21 @@ const parseType = (type: string) => {
 export default function CardDetails({
   params,
 }: {
-  params: { card_id: string };
+  params: { card_id: number };
 }) {
-  // TO-DO: Load images in .bmp format!
-  const cardDetails: CardTypeExtended | undefined = rawCardList.find(
-    (cardRaw) => cardRaw.collectionNumber === params.card_id
-  );
+  // TO-DO: Load images in .bmp / .svg format!
+  const [cardDetails, setCardDetails] = useState<CardTypeExtended>();
+
+  useEffect(() => {
+    GetCardByColNumber(params.card_id).then((card) => {
+      setCardDetails(card as CardTypeExtended);
+    });
+  }, [params.card_id]);
 
   // TO-DO: Add loading animation
   // TO-DO: Add error message when there is no card with the given id
   // TO-DO: Add simple animation with framer-motion
+  // TO-DO: Fix the footer in this page
 
   if (cardDetails) {
     const parsedRarity = parseRarity(cardDetails.rarity);
@@ -78,11 +83,10 @@ export default function CardDetails({
             <div>
               <Image
                 src={`/images/${params.card_id}.jpg`}
-                width={360}
-                height={540}
+                width={384}
+                height={538}
                 alt={cardDetails.name}
-                style={{ width: "100%" }}
-                className="rounded-md aspect-[120/180] object-cover"
+                className="rounded-lg"
               />
             </div>
 
@@ -160,6 +164,8 @@ export default function CardDetails({
       </main>
     );
   }
+
+  // TO-DO: Add loading animation
   return (
     <div className="flex flex-col items-center gap-2">
       <Image
