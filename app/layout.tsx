@@ -28,9 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={libre_franklin.variable + " " + judson.variable}>
-        <Header />
-        {children}
-        <Footer />
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

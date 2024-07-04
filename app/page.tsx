@@ -5,9 +5,9 @@ import Link from "next/link";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
 
-export default function Component() {
+export default function Home() {
   return (
-    <main className="bg-gray-900 text-white min-h-screen">
+    <main className="bg-gray-900 text-white">
       <section className="px-4 py-8 md:px-8 md:py-12 min-h-96 flex items-center">
         <div className="mx-auto max-w-4xl">
           <h2 className="flex flex-col gap-2 mb-4 text-4xl font-bold md:block md:text-5xl tracking-wide">

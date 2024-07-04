@@ -156,7 +156,7 @@ export default function Cards() {
   }, [searchByFilter, sortByFilter, cardsRawList]);
 
   return (
-    <main className="bg-gray-900 text-white min-h-screen">
+    <main className="bg-gray-900 text-white flex-grow">
       <section className="px-4 py-8 md:px-8 md:py-12">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-8 text-2xl font-bold md:text-3xl">
