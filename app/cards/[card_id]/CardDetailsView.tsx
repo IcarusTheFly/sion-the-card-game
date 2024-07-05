@@ -34,7 +34,6 @@ export default function CardDetailsView({
 }) {
   const parsedRarity = parseRarity(cardDetails.rarity);
 
-  console.log(cardDetails);
   return (
     <div className="mx-auto max-w-4xl px-4 md:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

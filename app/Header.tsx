@@ -5,16 +5,11 @@ import GamepadIcon from "./GamepadIcon";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
-type LinkType = {
-  name: string;
-  href: string;
-};
-
 export default function Header() {
-  // TO-DO: IMPLEMENT LOG IN !
+  // TO-DO: Implement log in !
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathName = usePathname();
-  const links: LinkType[] = [
+  const links: HeaderLinkType[] = [
     {
       name: "Inicio",
       href: "/",
@@ -29,7 +24,9 @@ export default function Header() {
     <header className="flex flex-col items-center justify-between bg-gray-950 px-4 py-4 text-white md:flex-row md:px-6 md:py-4">
       <div className="flex items-center gap-4">
         <GamepadIcon className="h-8 w-8" />
-        <h1 className="text-2xl font-bold">SION El Juego de la Biblia</h1>
+        <Link href="/">
+          <h1 className="text-2xl font-bold">SION El Juego de la Biblia</h1>
+        </Link>
       </div>
       <nav className="mt-4 flex flex-col items-center gap-4 sm:flex-row md:mt-0 md:gap-6">
         <div className="flex items-center gap-4 md:mt-0 md:gap-6">
