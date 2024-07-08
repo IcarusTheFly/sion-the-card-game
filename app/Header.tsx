@@ -6,7 +6,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
-  // TO-DO: Implement log in !
+  // TO-DO: Implement log in and show profile picture
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathName = usePathname();
   const links: HeaderLinkType[] = [
@@ -22,12 +22,10 @@ export default function Header() {
 
   return (
     <header className="flex flex-col items-center justify-between bg-gray-950 px-4 py-4 text-white md:flex-row md:px-6 md:py-4">
-      <div className="flex items-center gap-4">
+      <Link className="flex items-center gap-4" href="/">
         <GamepadIcon className="h-8 w-8" />
-        <Link href="/">
-          <h1 className="text-2xl font-bold">SION El Juego de la Biblia</h1>
-        </Link>
-      </div>
+        <h1 className="text-2xl font-bold">SION El Juego de la Biblia</h1>
+      </Link>
       <nav className="mt-4 flex flex-col items-center gap-4 sm:flex-row md:mt-0 md:gap-6">
         <div className="flex items-center gap-4 md:mt-0 md:gap-6">
           {links.map((item) => {
@@ -38,12 +36,6 @@ export default function Header() {
                 className={`text-sm font-medium transition duration-200 hover:text-yellow-400 hover:underline hover:underline-offset-2
                     ${pathName === item.href ? "text-yellow-400" : "text-white"}
                   `}
-                // className={`text-sm font-medium px-3 py-2 rounded-md transition duration-200
-                //     ${pathName === item.href ? 'bg-yellow-500 text-gray-900' : 'text-white hover:bg-gray-700'}
-                //   `}
-                // className={`text-sm font-medium hover:underline
-                // ${pathName === item.href ? "underline" : "" }
-                // `}
                 prefetch={false}
               >
                 {item.name}
