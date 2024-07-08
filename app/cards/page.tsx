@@ -65,11 +65,12 @@ export default function CardsPage() {
                     whileInView="visible"
                     viewport={{ once: true }}
                   >
-                    {/* <Image src="/placeholder_card.svg" width={120} height={180} alt="Card" priority={true} className="rounded-md aspect-[120/180] object-cover" /> */}
+                    {/* <Image src="/placeholder_card.svg" width={120} height={168} alt="Card" priority={true} className="rounded-md aspect-[120/168] object-cover" /> */}
+                    {/* TO-DO: Check width and height of images */}
                     <Image
                       src={`/images/${item.collectionNumber}.jpg`}
                       width={120}
-                      height={180}
+                      height={168}
                       alt="Card"
                       priority={true}
                       className="rounded-md"

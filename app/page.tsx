@@ -131,9 +131,9 @@ export default function HomePage() {
               <Image
                 src="/images/35.jpg"
                 width={120}
-                height={180}
+                height={168}
                 alt="Card"
-                className="rounded-md aspect-[120/180] object-cover"
+                className="rounded-md"
               />
               <span className="text-sm font-medium">Abel</span>
               <Link href={"/cards/35"} prefetch={false} replace={true}>
@@ -149,9 +149,9 @@ export default function HomePage() {
               <Image
                 src="/images/17.jpg"
                 width={120}
-                height={180}
+                height={168}
                 alt="Card"
-                className="rounded-md aspect-[120/180] object-cover"
+                className="rounded-md"
               />
               <span className="text-sm font-medium">Escudo de la fe</span>
               <Link href={"/cards/17"} prefetch={false} replace={true}>
@@ -167,9 +167,9 @@ export default function HomePage() {
               <Image
                 src="/images/54.jpg"
                 width={120}
-                height={180}
+                height={168}
                 alt="Card"
-                className="rounded-md aspect-[120/180] object-cover"
+                className="rounded-md"
               />
               <span className="text-sm font-medium">Prisión</span>
               <Link href={"/cards/54"} prefetch={false} replace={true}>
@@ -185,9 +185,9 @@ export default function HomePage() {
               <Image
                 src="/images/20.jpg"
                 width={120}
-                height={180}
+                height={168}
                 alt="Card"
-                className="rounded-md aspect-[120/180] object-cover"
+                className="rounded-md"
               />
               <span className="text-sm font-medium">León dorado</span>
               <Link href={"/cards/20"} prefetch={false} replace={true}>

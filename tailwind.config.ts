@@ -15,9 +15,6 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      aspectRatio: {
-        "120/180": "120 / 180",
-      },
       keyframes: {
         "loading-card-animation": {
           "0%, 100%": {

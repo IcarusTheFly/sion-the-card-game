@@ -11,9 +11,10 @@ export default function CardsListLoader() {
             <Image
               src={`/placeholder_card.svg`}
               width={120}
-              height={180}
+              height={168}
               alt="Loading..."
-              className="rounded-md min-h-[168px] aspect-[120/168] animate-loading-card"
+              priority={true}
+              className="rounded-md min-h-[168px] object-cover animate-loading-card"
             />
             <div className="animate-loading-card bg-slate-300 rounded-md h-6 w-1/2"></div>
             <div className="animate-loading-card bg-[#ffd700] rounded-md h-7 w-1/3"></div>
