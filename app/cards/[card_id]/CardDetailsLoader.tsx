@@ -23,12 +23,12 @@ export default function CardDetailsLoader() {
             <span className="animate-loading-card bg-gray-800 rounded-md h-6 w-12"></span>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="animate-loading-card bg-slate-300 rounded-md h-10 w-[100%]" />
-            <div className="animate-loading-card bg-slate-300 rounded-md h-10 w-[100%]" />
-            <div className="animate-loading-card bg-slate-300 rounded-md h-10 w-[100%]" />
-            <div className="animate-loading-card bg-slate-300 rounded-md h-10 w-[100%]" />
-            <p className="col-span-2 animate-loading-card bg-slate-300 rounded-md h-28 w-[100%]"></p>
-            <p className="col-span-2 animate-loading-card bg-slate-300 rounded-md h-28 w-[100%]"></p>
+            <div className="animate-loading-card bg-slate-300 rounded-md h-10 w-full" />
+            <div className="animate-loading-card bg-slate-300 rounded-md h-10 w-full" />
+            <div className="animate-loading-card bg-slate-300 rounded-md h-10 w-full" />
+            <div className="animate-loading-card bg-slate-300 rounded-md h-10 w-full" />
+            <p className="col-span-2 animate-loading-card bg-slate-300 rounded-md h-28 w-full"></p>
+            <p className="col-span-2 animate-loading-card bg-slate-300 rounded-md h-28 w-full"></p>
             <div>
               <BackButton url="/cards" />
             </div>

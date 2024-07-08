@@ -6,7 +6,7 @@ import CardDetailsLoader from "./CardDetailsLoader";
 import CardDetailsNotFound from "./CardDetailsNotFound";
 import CardDetailsView from "./CardDetailsView";
 
-export default function CardDetails({
+export default function CardDetailsPage({
   params,
 }: {
   params: { card_id: number };
