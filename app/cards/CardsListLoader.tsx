@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const loadingItems: Number = 12;
-// TO-DO: Fix issue with placeholder as LCP
+
 export default function CardsListLoader() {
   return (
     <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
@@ -13,7 +13,7 @@ export default function CardsListLoader() {
               width={120}
               height={180}
               alt="Loading..."
-              className="rounded-md min-h-[180x] aspect-[120/180] object-cover animate-loading-card"
+              className="rounded-md min-h-[168px] aspect-[120/168] animate-loading-card"
             />
             <div className="animate-loading-card bg-slate-300 rounded-md h-6 w-1/2"></div>
             <div className="animate-loading-card bg-[#ffd700] rounded-md h-7 w-1/3"></div>

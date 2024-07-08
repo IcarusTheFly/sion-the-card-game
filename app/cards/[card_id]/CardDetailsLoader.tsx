@@ -1,7 +1,6 @@
 import Image from "next/image";
 import BackButton from "./BackButton";
 
-// TO-DO: Fix issue with placeholder as LCP
 export default function CardDetailsLoader() {
   return (
     <div className="mx-auto max-w-4xl px-4 md:px-8">
@@ -13,6 +12,7 @@ export default function CardDetailsLoader() {
             height={538}
             alt="Loading..."
             className="rounded-lg min-h-[538px] object-cover animate-loading-card"
+            priority={true}
           />
         </div>
 

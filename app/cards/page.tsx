@@ -72,7 +72,7 @@ export default function CardsPage() {
                       height={180}
                       alt="Card"
                       priority={true}
-                      className="rounded-md aspect-[120/180] object-cover"
+                      className="rounded-md"
                     />
                     <span className="text-sm font-medium">{item.name}</span>
                     <Link

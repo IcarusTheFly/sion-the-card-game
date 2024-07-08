@@ -43,6 +43,7 @@ export default function CardDetailsView({
             width={384}
             height={538}
             alt={cardDetails.name}
+            priority={true}
             className="rounded-lg"
           />
         </div>
