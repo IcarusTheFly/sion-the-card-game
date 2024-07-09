@@ -66,7 +66,7 @@ export default function CardsPage() {
                     viewport={{ once: true }}
                   >
                     <Image
-                      src={`/images/${item.collectionNumber}.jpg`}
+                      src={`/thumbnails/${item.collectionNumber}.jpg`}
                       width={120}
                       height={168}
                       alt="Card"
