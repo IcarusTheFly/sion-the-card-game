@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
-import ChevronDoubleLeftIcon from "../../ChevronDoubleLeftIcon";
+import ChevronDoubleLeftIcon from "../../icons/ChevronDoubleLeftIcon";
 
 export default function BackButton({ url }: { url: string }) {
   return (

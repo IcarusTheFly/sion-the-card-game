@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import GamepadIcon from "./GamepadIcon";
+import GamepadIcon from "./icons/GamepadIcon";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
