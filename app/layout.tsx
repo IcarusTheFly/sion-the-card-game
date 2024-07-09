@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Libre_Franklin, Merriweather_Sans } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
@@ -34,6 +35,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <Analytics />
+          <SpeedInsights />
         </div>
       </body>
     </html>
