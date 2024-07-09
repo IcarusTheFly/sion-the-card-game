@@ -23,7 +23,7 @@ export default function Header() {
     <header className="flex flex-col items-center justify-between bg-gray-950 px-4 py-4 text-white md:flex-row md:px-6 md:py-4">
       <Link className="flex items-center gap-4" href="/">
         <GamepadIcon className="h-8 w-8" />
-        <h1 className="text-2xl font-bold">SION El Juego de la Biblia</h1>
+        <h1 className="text-2xl font-bold">SION El Juego de Cartas</h1>
       </Link>
       <nav className="mt-4 flex flex-col items-center gap-4 sm:flex-row md:mt-0 md:gap-6">
         <div className="flex items-center gap-4 md:mt-0 md:gap-6">

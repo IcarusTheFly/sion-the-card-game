@@ -16,8 +16,8 @@ const judson = Merriweather_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "SION El Juego de la Biblia",
-  description: "SION El Juego de la Biblia",
+  title: "SION El Juego de Cartas",
+  description: "SION El Juego de Cartas",
 };
 
 export default function RootLayout({

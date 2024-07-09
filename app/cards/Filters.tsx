@@ -35,17 +35,24 @@ const cardTypeBooleansKeys = {
   immune: true,
 };
 
-function isCardTypeExtendedKeyString(
+const isCardTypeExtendedKeyString = (
   key: string
-): key is keyof CardTypeStrings {
+): key is keyof CardTypeStrings => {
   return key in cardTypeStringsKeys;
-}
+};
 
-function isCardTypeExtendedKeyBoolean(
+const isCardTypeExtendedKeyBoolean = (
   key: string
-): key is keyof CardTypeBooleans {
+): key is keyof CardTypeBooleans => {
   return key in cardTypeBooleansKeys;
-}
+};
+
+const normalizeString = (str: string) => {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+};
 
 type FiltersProps = {
   cardsRawList: CardTypeExtended[];
@@ -67,9 +74,9 @@ export default function Filters({ cardsRawList, setCardList }: FiltersProps) {
       try {
         for (const key in cardTypeStringsKeys) {
           if (
-            card[key as keyof CardTypeStrings]
-              .toLowerCase()
-              .includes(searchByFilter.toLowerCase())
+            normalizeString(card[key as keyof CardTypeStrings]).includes(
+              normalizeString(searchByFilter)
+            )
           ) {
             return true;
           }
@@ -138,6 +145,7 @@ export default function Filters({ cardsRawList, setCardList }: FiltersProps) {
             ))}
           </select>
           {/* TO-DO: Add sort icon */}
+          {/* TO-DO: Add Clear Filters button */}
           {/* TO-DO: Sort by ASC and DESC*/}
         </div>
       </div>

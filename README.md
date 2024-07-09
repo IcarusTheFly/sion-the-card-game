@@ -1,2 +1,2 @@
-# SION El Juego de la Biblia
+# SION El Juego de Cartas
 

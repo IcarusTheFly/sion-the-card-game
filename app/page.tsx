@@ -10,10 +10,10 @@ export default function HomePage() {
     <main className="bg-gray-900 text-white">
       <section className="px-4 py-8 md:px-8 md:py-12 min-h-96 flex items-center">
         <div className="mx-auto max-w-4xl">
-          <h2 className="flex flex-col gap-2 mb-4 text-4xl font-bold md:block md:text-5xl tracking-wide">
+          <h2 className="flex flex-col gap-2 mb-4 text-4xl font-bold md:block md:text-4xl tracking-wide">
             <span>Bienvenido a </span>
-            <span className="bg-gradient-to-r from-[#ff1a1a] via-[#ff823f] to-[#ffcc00] text-transparent bg-clip-text">
-              SION El Juego de la Biblia
+            <span className="bg-gradient-to-r from-[#ff1a1a] via-[#ff823f] to-[#ffcc00] text-transparent bg-clip-text md:text-5xl">
+              SION El Juego de Cartas
             </span>
           </h2>
           <p className="mb-8 text-lg md:text-xl">

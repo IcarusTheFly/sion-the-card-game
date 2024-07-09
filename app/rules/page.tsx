@@ -11,7 +11,7 @@ export default function RulesPage() {
       <section className="bg-gray-900 px-4 py-8 md:px-8 md:py-12 leading-7">
         <div className="mx-auto max-w-4xl flex flex-wrap justify-between">
           <div className="mb-6 w-full md:w-[45%]">
-            <h3 className="mb-2 text-lg font-bold">Conceptos básicos</h3>
+            <h3 className="mb-2 text-lg font-bold text-[#ffcc00]">Conceptos básicos</h3>
             <p>
               Sión: el juego de cartas es un juego de estrategia para dos o más
               jugadores, cada uno de los cuales tiene un mazo personalizado de
@@ -23,7 +23,7 @@ export default function RulesPage() {
             </p>
           </div>
           <div className="mb-6 w-full md:w-[45%]">
-            <h3 className="mb-2 text-lg font-bold">Tres Facciones</h3>
+            <h3 className="mb-2 text-lg font-bold text-[#ff823f]">Tres Facciones</h3>
             <p>
               Los personajes de este mundo bíblico "viven en lugares erigidos
               para su propia facción". Cada lugar está representado por un
@@ -38,14 +38,14 @@ export default function RulesPage() {
       <section className="bg-gray-800 px-4 py-8 md:px-8 md:py-12 leading-7">
         <div className="mx-auto max-w-4xl flex flex-wrap justify-between">
           <div className="mb-6 w-full">
-            <h3 className="mb-2 text-lg font-bold">Tipos de cartas</h3>
+            <h3 className="mb-2 text-lg font-bold text-[#ffcc00]">Tipos de cartas</h3>
             <p>
               Las cartas de Sión se clasifican en tipos, los cuales tienen su
               propia forma de ser jugados.
             </p>
           </div>
           <div className="mb-6 w-full md:w-[45%]">
-            <h4 className="mb-2 text-lg font-bold">Estrategia</h4>
+            <h4 className="mb-2 text-lg font-bold text-[#ff823f]">Estrategia</h4>
             <p>
               Cada mazo cuenta con una carta de Estrategia, que definirá su
               facción predominante y los Personajes que necesitas reunir para
@@ -58,7 +58,7 @@ export default function RulesPage() {
             </p>
           </div>
           <div className="mb-6 w-full md:w-[45%]">
-            <h4 className="mb-2 text-lg font-bold">Evento</h4>
+            <h4 className="mb-2 text-lg font-bold text-[#ff823f]">Evento</h4>
             <p>
               Los Eventos son cartas que, generalmente, dan soporte a tus
               Personajes y Lugares, pero también pueden sabotear a los demás
@@ -71,7 +71,7 @@ export default function RulesPage() {
             </p>
           </div>
           <div className="mb-6 w-full md:w-[45%]">
-            <h4 className="mb-2 text-lg font-bold">Lugar</h4>
+            <h4 className="mb-2 text-lg font-bold text-[#ff823f]">Lugar</h4>
             <p>
               Normalmente sólo se puede jugar un Lugar por turno, el cuál
               permanecerá sobre el campo de juego. Un Lugar común será girado
@@ -84,7 +84,7 @@ export default function RulesPage() {
             </p>
           </div>
           <div className="mb-6 w-full md:w-[45%]">
-            <h4 className="mb-2 text-lg font-bold">Objeto</h4>
+            <h4 className="mb-2 text-lg font-bold text-[#ff823f]">Objeto</h4>
             <p>
               Los Objetos potencian las capacidades de tus Personajes y se
               juegan como los Eventos. A diferencia de éstos, cuando el
@@ -96,7 +96,7 @@ export default function RulesPage() {
             </p>
           </div>
           <div className="mb-6 w-full md:w-[45%]">
-            <h4 className="mb-2 text-lg font-bold">Personaje</h4>
+            <h4 className="mb-2 text-lg font-bold text-[#ff823f]">Personaje</h4>
             <p>
               Hospeda simultáneamente a tantos Personajes como indique tu
               Estrategia para ganar la partida. Al jugarlos, estos se mantendrán
@@ -109,7 +109,7 @@ export default function RulesPage() {
             </p>
           </div>
           <div className="mb-6 w-full md:w-[45%]">
-            <h4 className="mb-2 text-lg font-bold">Profecía</h4>
+            <h4 className="mb-2 text-lg font-bold text-[#ff823f]">Profecía</h4>
             <p>
               Un mazo debe incluir entre 6-8 cartas de Profecía, que serán
               jugadas en la fase que lleva su nombre. Estas poderosas cartas son
