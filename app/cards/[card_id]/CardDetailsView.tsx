@@ -26,7 +26,6 @@ const parseType = (type: string) => {
   return typeMap.get(type) || typeMap.get("unknown");
 };
 
-// TO-DO: Load images in .bmp / .svg format!
 export default function CardDetailsView({
   cardDetails,
 }: {

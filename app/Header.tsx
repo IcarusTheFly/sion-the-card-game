@@ -6,7 +6,6 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
-  // TO-DO: Implement log in and show profile picture
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathName = usePathname();
   const links: HeaderLinkType[] = [
@@ -16,7 +15,7 @@ export default function Header() {
     },
 
     { name: "Cartas", href: "/cards" },
-    { name: "Mazos", href: "/decks" },
+    // { name: "Mazos", href: "/decks" },
     { name: "Reglamento", href: "/rules" },
   ];
 
@@ -45,6 +44,7 @@ export default function Header() {
         </div>
         {!isLoggedIn && (
           <div className="flex items-center gap-2">
+            {/* TO-DO: Implement log in and show profile picture */}
             <Link
               href="#"
               className="inline-flex items-center justify-center rounded-md bg-[#ffd700] px-4 py-2 text-gray-950 transition-colors hover:bg-[#ffcc00] focus:ring-[#ffd700]"
