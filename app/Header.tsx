@@ -32,8 +32,16 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-sm font-medium transition duration-200 hover:text-yellow-400 hover:underline hover:underline-offset-2
-                    ${pathName === item.href ? "text-yellow-400" : "text-white"}
+                className={`text-sm font-medium transition duration-200 hover:text-yellow-400 hover:underline hover:underline-offset-2 focus:no-underline
+                    ${
+                      (
+                        item.href === "/"
+                          ? pathName === item.href
+                          : pathName.includes(item.href)
+                      )
+                        ? "text-yellow-400"
+                        : "text-white"
+                    }
                   `}
                 prefetch={false}
               >

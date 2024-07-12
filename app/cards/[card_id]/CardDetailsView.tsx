@@ -87,7 +87,7 @@ export default function CardDetailsView({
               <span className="text-sm font-medium text-gray-400">Facción</span>
               <p className="text-lg font-bold">{cardDetails.faction || "-"}</p>
             </div>
-            <p className="text-lg col-span-2">{cardDetails.ability}</p>
+            <p className="text-base col-span-2">{cardDetails.ability}</p>
             <p className="text-sm col-span-2 italic">{cardDetails.legend}</p>
             <div>
               <BackButton url="/cards" />
