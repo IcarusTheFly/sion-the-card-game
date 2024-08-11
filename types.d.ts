@@ -25,3 +25,8 @@ type HeaderLinkType = {
   name: string;
   href: string;
 };
+
+interface LoginFormData {
+  email: string;
+  password: string;
+};
