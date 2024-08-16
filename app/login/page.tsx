@@ -3,21 +3,40 @@
 import { Button } from "@nextui-org/button";
 import { loginService } from "../db/auth/login";
 import { FormEvent, useState } from "react";
+import ButtonSpinner from "../icons/ButtonSpinner";
+import { createSessionCookie } from "@/lib";
+import { useRouter } from "next/navigation";
+import { useUserDataContext } from "../UserDataContext";
 
 export default function LoginPage() {
-  const login = async (event: FormEvent) => {
-    event.preventDefault();
-    console.log("Logging in...");
-    const result = await loginService(formData.email, formData.password);
-    console.log(result);
-
-    // TO-DO: Now log the user in
-  };
-
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
+  const { setUserData } = useUserDataContext();
+
+  const login = async (event: FormEvent) => {
+    event.preventDefault();
+    setIsLoading(true);
+    const result = await loginService(formData.email, formData.password);
+    setIsLoading(false);
+    if (!result.data) {
+      setErrorMessage("Nombre de usuario o contraseña incorrectos");
+    } else if (result.error !== "") {
+      setErrorMessage(result.error);
+    } else {
+      await createSessionCookie(result.data);
+      setErrorMessage("");
+      setUserData({
+        email: result.data.email,
+        username: result.data.username,
+      });
+      router.push("/");
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -26,7 +45,6 @@ export default function LoginPage() {
     });
   };
 
-  // TO-DO: Show a Loading spinner when logging in
   return (
     <main className="bg-gray-900 text-white flex-grow">
       <section className="px-4 py-8 md:px-8 md:py-12">
@@ -71,12 +89,18 @@ export default function LoginPage() {
                     className="w-full mt-2 p-2 focus:border-gray-300 bg-slate-600 sm:text-sm md:w-full rounded-md"
                   />
                 </div>
-                <div className="flex flex-row-reverse">
+                <div className="flex flex-col-reverse sm:flex-row sm:justify-between">
+                  <p className="text-red-500 text-sm mt-4 sm:my-auto sm:py-2">
+                    {errorMessage}
+                  </p>
                   <Button
                     type="submit"
-                    className="w-full sm:w-auto bg-[#ffd700] text-gray-800 rounded-md hover:bg-[#ffcc00] focus:ring-[#ffd700] focus:outline-none"
+                    disabled={isLoading}
+                    className={`w-full sm:w-auto bg-[#ffd700] text-gray-800 rounded-md hover:bg-[#ffcc00] focus:ring-[#ffd700] focus:outline-none
+                      ${isLoading && "cursor-not-allowed opacity-50"}
+                    `}
                   >
-                    Log In
+                    {isLoading ? <ButtonSpinner size="5" /> : "Log In"}
                   </Button>
                 </div>
               </form>

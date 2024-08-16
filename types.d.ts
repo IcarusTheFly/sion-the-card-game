@@ -26,7 +26,22 @@ type HeaderLinkType = {
   href: string;
 };
 
+type UserPayload = {
+  username: string;
+  email: string;
+};
+
+type LoginResultType = {
+  data: UserPayload | null;
+  error: string;
+};
+
 interface LoginFormData {
   email: string;
   password: string;
 };
+
+interface UserDataContextType {
+  userData: UserPayload;
+  setUserData: React.Dispatch<React.SetStateAction<UserPayload>>;
+}
