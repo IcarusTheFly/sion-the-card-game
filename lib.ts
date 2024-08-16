@@ -32,7 +32,7 @@ export const getSession = async () => {
 };
 
 export const createSessionCookie = async (payload: UserPayload) => {
-  const expirationDate = new Date(Date.now() +  10 * 1000);
+  const expirationDate = new Date(Date.now() + 30 * 60 * 1000);
   const session = await jwtEncrypt(payload);
 
   cookies().set("session", session, {
@@ -54,7 +54,7 @@ export const updateSession = async (request: NextRequest) => {
   }
 
   const decryptedSession = await jwtDecrypt(session);
-  decryptedSession.expires = new Date(Date.now() +  10 * 1000);
+  decryptedSession.expires = new Date(Date.now() + 30 * 60 * 1000);
   const res = NextResponse.next();
   res.cookies.set("session", await jwtEncrypt(decryptedSession), {
     expires: decryptedSession.expires,
