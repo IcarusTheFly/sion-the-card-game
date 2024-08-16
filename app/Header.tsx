@@ -52,17 +52,10 @@ export default function Header() {
         </div>
         {!isLoggedIn && (
           <div className="flex items-center gap-2">
-            {/* TO-DO: Implement log in and show profile picture */}
-            <Link
-              href="#"
-              className="inline-flex items-center justify-center rounded-md bg-[#ffd700] px-4 py-2 text-gray-950 transition-colors hover:bg-[#ffcc00] focus:ring-[#ffd700]"
-              prefetch={false}
-            >
-              Sign Up
-            </Link>
+            {/* TO-DO: Show profile picture and add log out option*/}
             <Link
               href="/login"
-              className="inline-flex items-center justify-center rounded-md border border-[#ffd700] px-4 py-2 text-[#ffd700] transition-colors hover:bg-[#ffd700] hover:text-gray-950 focus:ring-[#ffd700]"
+              className="inline-flex items-center justify-center rounded-md bg-[#ffd700] px-4 py-2 text-gray-950 transition-colors hover:bg-[#ffcc00] focus:ring-[#ffd700]"
               prefetch={false}
             >
               Log In
