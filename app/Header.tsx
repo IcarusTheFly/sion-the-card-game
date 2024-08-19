@@ -4,14 +4,13 @@ import Link from "next/link";
 import GamepadIcon from "./icons/GamepadIcon";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { destroySessionCookie, getSession } from "@/lib";
 import { Button } from "@nextui-org/button";
 import { useUserDataContext } from "./UserDataContext";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const { userData, setUserData } = useUserDataContext();
+  const { userData, destroySession, fetchSession } = useUserDataContext();
   const pathName = usePathname();
   const links: HeaderLinkType[] = [
     {
@@ -26,21 +25,18 @@ export default function Header() {
   ];
 
   useEffect(() => {
-    getSession().then((session) => {
-      if (session) {
-        setUsername(session.username);
+    fetchSession().then(() => {
+      if (userData.username) {
+        setUsername(userData.username);
         setIsLoggedIn(true);
       }
     });
   }, [userData]);
 
   const logout = () => {
-    destroySessionCookie();
-    setUserData({
-      email: "",
-      username: "",
-    });
+    destroySession();
     setIsLoggedIn(false);
+    fetchSession();
   };
 
   return (
@@ -87,11 +83,16 @@ export default function Header() {
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <h3>Welcome, {username}!</h3>
             {/* TO-DO: Show profile picture */}
             <Button
+              disableRipple
+              className="inline-flex items-center justify-center rounded-lg border text-base border-[#ffd700] px-4 py-2 text-[#ffd700] bg-gray-600 focus:outline-none hover:cursor-auto"
+            >
+              Hola, {username}
+            </Button>
+            <Button
               onClick={logout}
-              className="inline-flex items-center justify-center rounded-md border text-base border-[#ffd700] px-4 py-2 text-[#ffd700] bg-gray-950 hover:bg-[#ffd700] hover:text-gray-950 hover:opacity-[100 focus:ring-[#ffd700] focus:outline-none"
+              className="inline-flex items-center justify-center rounded-md border text-base border-[#ffd700] px-4 py-2 text-[#ffd700] bg-gray-950 hover:bg-[#ffd700] hover:text-gray-950 hover:opacity-1 focus:ring-[#ffd700] focus:outline-none"
             >
               Log Out
             </Button>

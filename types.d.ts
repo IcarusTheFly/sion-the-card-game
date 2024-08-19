@@ -39,9 +39,11 @@ type LoginResultType = {
 interface LoginFormData {
   email: string;
   password: string;
-};
+}
 
 interface UserDataContextType {
   userData: UserPayload;
-  setUserData: React.Dispatch<React.SetStateAction<UserPayload>>;
+  createSession: (payload: UserPayload) => Promise<void>;
+  destroySession: () => Promise<void>;
+  fetchSession: () => Promise<void>;
 }

@@ -1,11 +1,11 @@
-// Temporary file to hold the session services in the project
 "use server";
 
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-const sessionKey = new TextEncoder().encode(process.env.SESSION_KEY);
+const SESSION_KEY = new TextEncoder().encode(process.env.SESSION_KEY);
+const COOKIE_EXPIRY_TIME = 30 * 60 * 1000;
 const jwtEncrypt = async (data: any): Promise<any> => {
   return await new SignJWT(data)
     .setProtectedHeader({
@@ -13,17 +13,17 @@ const jwtEncrypt = async (data: any): Promise<any> => {
     })
     .setIssuedAt()
     .setExpirationTime("10m")
-    .sign(sessionKey);
+    .sign(SESSION_KEY);
 };
 
 const jwtDecrypt = async (data: string): Promise<any> => {
-  const { payload } = await jwtVerify(data, sessionKey, {
+  const { payload } = await jwtVerify(data, SESSION_KEY, {
     algorithms: [process.env.SESSION_ENCRYPTION_ALGORITHM || "HS256"],
   });
   return payload;
 };
 
-export const getSession = async () => {
+export const getSessionCookie = async () => {
   const session = cookies().get("session")?.value;
   if (!session) {
     return null;
@@ -32,7 +32,7 @@ export const getSession = async () => {
 };
 
 export const createSessionCookie = async (payload: UserPayload) => {
-  const expirationDate = new Date(Date.now() + 30 * 60 * 1000);
+  const expirationDate = new Date(Date.now() + COOKIE_EXPIRY_TIME);
   const session = await jwtEncrypt(payload);
 
   cookies().set("session", session, {
@@ -47,14 +47,14 @@ export const destroySessionCookie = () => {
   });
 };
 
-export const updateSession = async (request: NextRequest) => {
+export const updateSessionCookie = async (request: NextRequest) => {
   const session = request.cookies.get("session")?.value;
   if (!session) {
     return;
   }
 
   const decryptedSession = await jwtDecrypt(session);
-  decryptedSession.expires = new Date(Date.now() + 30 * 60 * 1000);
+  decryptedSession.expires = new Date(Date.now() + COOKIE_EXPIRY_TIME);
   const res = NextResponse.next();
   res.cookies.set("session", await jwtEncrypt(decryptedSession), {
     expires: decryptedSession.expires,

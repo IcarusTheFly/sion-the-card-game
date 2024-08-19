@@ -1,6 +1,12 @@
-import { NextRequest } from "next/server";
-import { updateSession } from "./lib";
+import { NextRequest, NextResponse } from "next/server";
+import { updateSessionCookie } from "./lib/session";
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+  const response = await updateSessionCookie(request);
+
+  if (response) {
+    return response;
+  }
+
+  return NextResponse.next();
 }

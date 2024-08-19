@@ -4,7 +4,6 @@ import { Button } from "@nextui-org/button";
 import { loginService } from "../db/auth/login";
 import { FormEvent, useState } from "react";
 import ButtonSpinner from "../icons/ButtonSpinner";
-import { createSessionCookie } from "@/lib";
 import { useRouter } from "next/navigation";
 import { useUserDataContext } from "../UserDataContext";
 
@@ -16,7 +15,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
-  const { setUserData } = useUserDataContext();
+  const { createSession, fetchSession } = useUserDataContext();
 
   const login = async (event: FormEvent) => {
     event.preventDefault();
@@ -28,12 +27,9 @@ export default function LoginPage() {
     } else if (result.error !== "") {
       setErrorMessage(result.error);
     } else {
-      await createSessionCookie(result.data);
+      await createSession(result.data);
       setErrorMessage("");
-      setUserData({
-        email: result.data.email,
-        username: result.data.username,
-      });
+      fetchSession();
       router.push("/");
     }
   };

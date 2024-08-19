@@ -1,6 +1,10 @@
 "use client";
 
-import { getSession } from "@/lib";
+import {
+  createSessionCookie,
+  destroySessionCookie,
+  getSessionCookie,
+} from "@/lib/session";
 import React, {
   createContext,
   useContext,
@@ -22,25 +26,47 @@ export const UserDataProvider: React.FC<{ children: ReactNode }> = ({
     username: "",
   });
 
-  useEffect(() => {
-    getSession().then((session) => {
-      if (session) {
+  const createSession = async (payload: UserPayload) => {
+    await createSessionCookie(payload);
+  };
+
+  const destroySession = async () => {
+    destroySessionCookie();
+  };
+
+  const fetchSession = async () => {
+    const session = await getSessionCookie();
+    if (session) {
+      if (
+        userData.email !== session.email ||
+        userData.username !== session.username
+      ) {
         setUserData({
           email: session.email,
           username: session.username,
         });
       }
-    });
+    } else {
+      if (userData.email || userData.username) {
+        setUserData({ email: "", username: "" });
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchSession();
   }, []);
 
   return (
-    <UserDataContext.Provider value={{ userData, setUserData }}>
+    <UserDataContext.Provider
+      value={{ userData, createSession, destroySession, fetchSession }}
+    >
       {children}
     </UserDataContext.Provider>
   );
 };
 
-// Create a custom hook to use the GlobalContext
+// Create a custom hook to use the UserDataContext
 export const useUserDataContext = () => {
   const context = useContext(UserDataContext);
   if (!context) {
