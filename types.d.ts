@@ -47,3 +47,8 @@ interface UserDataContextType {
   destroySession: () => Promise<void>;
   fetchSession: () => Promise<void>;
 }
+
+declare module "bcrypt" {
+  export function hashSync(password: string, saltRounds: number): string;
+  export function compareSync(password: string, hash: string): boolean;
+}

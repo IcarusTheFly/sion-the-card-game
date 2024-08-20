@@ -36,6 +36,7 @@ export const UserDataProvider: React.FC<{ children: ReactNode }> = ({
 
   const fetchSession = async () => {
     const session = await getSessionCookie();
+
     if (session) {
       if (
         userData.email !== session.email ||
@@ -52,10 +53,6 @@ export const UserDataProvider: React.FC<{ children: ReactNode }> = ({
       }
     }
   };
-
-  useEffect(() => {
-    fetchSession();
-  }, []);
 
   return (
     <UserDataContext.Provider

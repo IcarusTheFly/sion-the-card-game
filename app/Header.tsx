@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@nextui-org/button";
 import { useUserDataContext } from "./UserDataContext";
+import ButtonSpinner from "./icons/ButtonSpinner";
 
 export default function Header() {
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const { userData, destroySession, fetchSession } = useUserDataContext();
@@ -26,11 +28,18 @@ export default function Header() {
 
   useEffect(() => {
     fetchSession().then(() => {
-      if (userData.username) {
-        setUsername(userData.username);
-        setIsLoggedIn(true);
-      }
+      setIsLoading(false);
     });
+  }, []);
+
+  useEffect(() => {
+    if (userData.username) {
+      setUsername(userData.username);
+      setIsLoggedIn(true);
+    } else {
+      setUsername("");
+      setIsLoggedIn(false);
+    }
   }, [userData]);
 
   const logout = () => {
@@ -70,8 +79,13 @@ export default function Header() {
             );
           })}
         </div>
-        {/* TO-DO: Add loader when is checking if the user is logged in */}
-        {!isLoggedIn ? (
+        {isLoading ? (
+          <div className="flex items-center gap-2">
+            <Button className="inline-flex items-center justify-center rounded-md border text-base border-[#ffd700] px-4 py-2 text-[#ffd700] bg-gray-950 hover:bg-[#ffd700] hover:text-gray-950 hover:opacity-1 focus:ring-[#ffd700] focus:outline-none">
+              <ButtonSpinner size="5" />
+            </Button>
+          </div>
+        ) : !isLoggedIn ? (
           <div className="flex items-center gap-2">
             <Link
               href="/login"
