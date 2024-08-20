@@ -30,7 +30,7 @@ export default function Header() {
     fetchSession().then(() => {
       setIsLoading(false);
     });
-  }, []);
+  }, [fetchSession]);
 
   useEffect(() => {
     if (userData.username) {

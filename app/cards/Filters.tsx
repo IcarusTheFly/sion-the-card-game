@@ -108,7 +108,7 @@ export default function Filters({ cardsRawList, setCardList }: FiltersProps) {
       }
     );
     setCardList(sortedCardList);
-  }, [searchByFilter, sortByFilter, cardsRawList]);
+  }, [searchByFilter, sortByFilter, cardsRawList, setCardList]);
 
   return (
     <div className="mb-12 flex flex-col sm:flex-row sm:justify-end gap-8">
