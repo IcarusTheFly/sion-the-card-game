@@ -14,7 +14,7 @@ export default function Footer() {
           </Link>
         </div>
         <p className="text-center text-sm text-gray-400">
-          &copy; 2024 SION EL Juego de Cartas. Todos los derechos reservados.
+          &copy; 2024 SION El Juego de Cartas. Todos los derechos reservados.
         </p>
       </div>
     </footer>
