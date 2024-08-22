@@ -21,9 +21,21 @@ type CardTypeBooleans = {
 
 type CardTypeExtended = CardTypeStrings & CardTypeBooleans;
 
+type DeckType = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+type DeckTypeExtended = DeckType & {
+  card_id: string;
+  quantity: string;
+};
+
 type HeaderLinkType = {
   name: string;
   href: string;
+  isForLoggedUsers: boolean;
 };
 
 type UserPayload = {

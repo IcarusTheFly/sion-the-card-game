@@ -18,12 +18,12 @@ export default function Header() {
     {
       name: "Inicio",
       href: "/",
+      isForLoggedUsers: false,
     },
-
-    { name: "Cartas", href: "/cards" },
+    { name: "Cartas", href: "/cards", isForLoggedUsers: false },
     // TO-DO: Create and protect "decks" page
-    // { name: "Mazos", href: "/decks" },
-    { name: "Reglamento", href: "/rules" },
+    { name: "Mazos", href: "/decks", isForLoggedUsers: true },
+    { name: "Reglamento", href: "/rules", isForLoggedUsers: false },
   ];
 
   useEffect(() => {
@@ -57,6 +57,9 @@ export default function Header() {
       <nav className="mt-4 flex flex-col items-center gap-4 sm:flex-row md:mt-0 md:gap-6">
         <div className="flex items-center gap-4 md:mt-0 md:gap-6">
           {links.map((item) => {
+            if (item.isForLoggedUsers && !isLoggedIn) {
+              return null;
+            }
             return (
               <Link
                 key={item.name}
