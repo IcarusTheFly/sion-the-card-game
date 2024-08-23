@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/button";
 import { loginService } from "../db/auth/login";
 import { FormEvent, useState } from "react";
 import ButtonSpinner from "../icons/ButtonSpinner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useUserDataContext } from "../UserDataContext";
 
 export default function LoginPage() {
@@ -15,6 +15,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { createSession, fetchSession } = useUserDataContext();
 
   const login = async (event: FormEvent) => {
@@ -30,7 +31,8 @@ export default function LoginPage() {
       await createSession(result.data);
       setErrorMessage("");
       fetchSession();
-      router.push("/");
+      const redirectUrl = searchParams.get("redirectTo") || "/";
+      router.push(redirectUrl);
     }
   };
 

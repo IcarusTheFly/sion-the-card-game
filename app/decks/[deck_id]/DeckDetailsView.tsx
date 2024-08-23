@@ -26,7 +26,7 @@ const parseType = (type: string) => {
   return typeMap.get(type) || typeMap.get("unknown");
 };
 
-export default function CardDetailsView({
+export default function DeckDetailsView({
   cardDetails,
 }: {
   cardDetails: CardTypeExtended;

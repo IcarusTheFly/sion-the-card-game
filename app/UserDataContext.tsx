@@ -31,7 +31,7 @@ export const UserDataProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const destroySession = async () => {
-    destroySessionCookie();
+    await destroySessionCookie();
   };
 
   const fetchSession = async () => {

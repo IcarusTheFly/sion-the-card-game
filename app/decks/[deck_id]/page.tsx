@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import GetDeckByID from "../../db/GetDeckByID";
-import CardDetailsLoader from "./CardDetailsLoader";
-import CardDetailsNotFound from "./CardDetailsNotFound";
+import CardDetailsLoader from "./DeckDetailsLoader";
+import DeckDetailsNotFound from "./DeckDetailsNotFound";
 import { useUserDataContext } from "@/app/UserDataContext";
 
 export default function DeckDetailsPage({
@@ -27,7 +27,7 @@ export default function DeckDetailsPage({
   return (
     <main className="bg-gray-900 text-white py-8 md:py-12 flex-grow">
       {deckLoading && <CardDetailsLoader />}
-      {!deckLoading && !deckDetails && <CardDetailsNotFound />}
+      {!deckLoading && !deckDetails && <DeckDetailsNotFound />}
       {!deckLoading && deckDetails && <p>Deck details will appear here</p>}
     </main>
   );

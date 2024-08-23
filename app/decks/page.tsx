@@ -1,68 +1,49 @@
 "use client";
 
-// import { Button } from "@nextui-org/button";
-// import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CardsListLoader from "./CardsListLoader";
 import GetDecks from "../db/GetDecks";
 import { useUserDataContext } from "../UserDataContext";
+import DecksListNewDeck from "./DecksListNewDeck";
 
 export default function DecksPage() {
   const { userData } = useUserDataContext();
-  // const cardVariant = {
-  //   visible: {
-  //     opacity: 1,
-  //     scale: 1,
-  //     transition: {
-  //       duration: 0.25,
-  //     },
-  //     y: 0,
-  //   },
-  //   hidden: {
-  //     opacity: 0,
-  //     scale: 0.5,
-  //     y: 50,
-  //   },
-  // };
-
   const [decksList, setDecksList] = useState<DeckType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // TO-DO: Play with useMemo and useCallback
   useEffect(() => {
+    if (!userData.email) {
+      setDecksList([]);
+      setIsLoading(false);
+      return;
+    }
+
     GetDecks(userData.email).then((decks) => {
+      // decks.push(decks[0]);
+      // decks[1].id += 1;
       setDecksList(decks as DeckType[]);
       setIsLoading(false);
     });
   }, [userData.email]);
-
-  // const [cardList, setCardList] = useState(
-  //   cardsRawList.toSorted((a: CardTypeExtended, b: CardTypeExtended) =>
-  //     a.name.localeCompare(b.name)
-  //   )
-  // );
 
   return (
     <main className="bg-gray-900 text-white flex-grow">
       <section className="px-4 py-8 md:px-8 md:py-12">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-8 text-2xl font-bold md:text-3xl">Mazos creados</h2>
-          {/* TO-DO: Load images in a compressed format */}
           {isLoading ? (
             <CardsListLoader />
           ) : (
             <div className="mx-auto max-w-4xl">
-              {/* TO-DO: Control huge deck descriptions */}
-              {decksList.map((item) => {
-                return (
-                  <div
-                    key={item.id}
-                    className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-                  >
-                    <div className="rounded-md bg-gray-700 p-4">
-                      {/* <Image src="/placeholder_card.svg" width={300} height={200} alt="Deck" className="mb-4 rounded-md" /> */}
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {/* Add new deck button */}
+                <DecksListNewDeck />
+                {/* TO-DO: Control huge deck descriptions */}
+                {/* {decksList.map((item) => {
+                  return (
+                    <div key={item.id} className="rounded-md bg-gray-700 p-4">
                       <Image
                         src="/images/26.jpg"
                         width={300}
@@ -83,9 +64,9 @@ export default function DecksPage() {
                         Ver mazo
                       </Link>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })} */}
+              </div>
             </div>
             // <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
             //   {decksList.map((item) => {

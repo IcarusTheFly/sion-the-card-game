@@ -8,5 +8,11 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
+  if (request.nextUrl.pathname.includes("/decks")) {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("redirectTo", request.nextUrl.pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
   return NextResponse.next();
 }

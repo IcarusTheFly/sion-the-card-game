@@ -3,7 +3,7 @@
 import Link from "next/link";
 import GamepadIcon from "./icons/GamepadIcon";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@nextui-org/button";
 import { useUserDataContext } from "./UserDataContext";
 import ButtonSpinner from "./icons/ButtonSpinner";
@@ -14,6 +14,7 @@ export default function Header() {
   const [username, setUsername] = useState("");
   const { userData, destroySession, fetchSession } = useUserDataContext();
   const pathName = usePathname();
+  const router = useRouter();
   const links: HeaderLinkType[] = [
     {
       name: "Inicio",
@@ -42,10 +43,11 @@ export default function Header() {
     }
   }, [userData]);
 
-  const logout = () => {
-    destroySession();
+  const logout = async () => {
+    await destroySession();
     setIsLoggedIn(false);
     fetchSession();
+    router.push("/");
   };
 
   return (

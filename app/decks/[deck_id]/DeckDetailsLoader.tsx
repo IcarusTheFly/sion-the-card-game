@@ -1,7 +1,7 @@
 import Image from "next/image";
 import BackButton from "./BackButton";
 
-export default function CardDetailsLoader() {
+export default function DeckDetailsLoader() {
   return (
     <div className="mx-auto max-w-4xl px-4 md:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
