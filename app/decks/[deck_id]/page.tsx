@@ -18,7 +18,8 @@ export default function DeckDetailsPage({
   useEffect(() => {
     GetDeckByID(userData.email, params.deck_id).then((deck) => {
       if (deck) {
-        setDeckDetails(deck as DeckTypeExtended);
+        // TO-DO: Clarify the data types
+        // setDeckDetails(deck as DeckTypeExtended);
       }
       setDeckLoading(false);
     });

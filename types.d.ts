@@ -27,9 +27,14 @@ type DeckType = {
   description: string;
 };
 
+type CardsInDeckType = {
+  name: string;
+  collectionNumber: string;
+  quantity: number;
+};
+
 type DeckTypeExtended = DeckType & {
-  card_id: string;
-  quantity: string;
+  cards: CardsInDeckType[];
 };
 
 type HeaderLinkType = {

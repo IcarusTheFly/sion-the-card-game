@@ -41,10 +41,12 @@ export const createSessionCookie = async (payload: UserPayload) => {
   });
 };
 
-export const destroySessionCookie = () => {
+export const destroySessionCookie = async () => {
   cookies().set("session", "", {
     expires: new Date(0),
   });
+
+  await Promise.resolve();
 };
 
 export const updateSessionCookie = async (request: NextRequest) => {
@@ -62,3 +64,14 @@ export const updateSessionCookie = async (request: NextRequest) => {
   });
   return res;
 };
+
+// export const getRedirectCookie = async () => {
+//   const redirect = cookies().get("redirect")?.value;
+//   if (!redirect) {
+//     return null;
+//   }
+
+//   cookies().delete("redirect");
+
+//   return redirect;
+// };

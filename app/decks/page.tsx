@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import CardsListLoader from "./CardsListLoader";
 import GetDecks from "../db/GetDecks";
 import { useUserDataContext } from "../UserDataContext";
 import DecksListNewDeck from "./DecksListNewDeck";
+import DeckListFloatingNewDeck from "./DeckListFloatingNewDeck";
 
 export default function DecksPage() {
   const { userData } = useUserDataContext();
@@ -40,6 +39,7 @@ export default function DecksPage() {
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {/* Add new deck button */}
                 <DecksListNewDeck />
+                <DeckListFloatingNewDeck />
                 {/* TO-DO: Control huge deck descriptions */}
                 {/* {decksList.map((item) => {
                   return (

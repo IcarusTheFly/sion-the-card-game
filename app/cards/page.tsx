@@ -1,31 +1,12 @@
 "use client";
 
-import { Button } from "@nextui-org/button";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import GetCards from "../db/GetCards";
 import Filters from "./Filters";
 import CardsListLoader from "./CardsListLoader";
+import CardsListView from "./CardsListView";
 
 export default function CardsPage() {
-  const cardVariant = {
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.25,
-      },
-      y: 0,
-    },
-    hidden: {
-      opacity: 0,
-      scale: 0.5,
-      y: 50,
-    },
-  };
-
   const [cardsRawList, setCardsRawList] = useState<CardTypeExtended[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -50,46 +31,10 @@ export default function CardsPage() {
             Lista de cartas
           </h2>
           <Filters cardsRawList={cardsRawList} setCardList={setCardList} />
-          {/* TO-DO: Load images in a compressed format */}
           {isLoading ? (
             <CardsListLoader />
           ) : (
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-              {cardList.map((item) => {
-                return (
-                  <motion.div
-                    key={item.collectionNumber}
-                    className="flex flex-col items-center gap-2"
-                    variants={cardVariant}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                  >
-                    <Image
-                      src={`/thumbnails/${item.collectionNumber}.jpg`}
-                      width={120}
-                      height={168}
-                      alt="Card"
-                      priority={true}
-                      className="rounded-md"
-                    />
-                    <span className="text-sm font-medium">{item.name}</span>
-                    <Link
-                      href={`/cards/${item.collectionNumber}`}
-                      prefetch={false}
-                      replace={true}
-                    >
-                      <Button
-                        size="sm"
-                        className="bg-[#ffd700] text-gray-950 hover:bg-[#ffcc00] focus:ring-[#ffd700]"
-                      >
-                        Ver carta
-                      </Button>
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
+            <CardsListView cardList={cardList} />
           )}
         </div>
       </section>
