@@ -1,4 +1,5 @@
 type CardTypeStrings = {
+  id: string;
   title: string;
   name: string;
   legend: string;
@@ -25,9 +26,11 @@ type DeckType = {
   id: string;
   name: string;
   description: string;
+  strategyCollectionNumber?: string;
 };
 
 type CardsInDeckType = {
+  id: string;
   name: string;
   collectionNumber: string;
   quantity: number;

@@ -6,6 +6,7 @@ import "./globals.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import { UserDataProvider } from "./UserDataContext";
+import { Providers } from "./providers";
 
 const libre_franklin = Libre_Franklin({
   subsets: ["latin"],
@@ -31,15 +32,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={libre_franklin.variable + " " + judson.variable}>
-        <div className="min-h-screen flex flex-col">
-          <UserDataProvider>
-            <Header />
-            {children}
-            <Footer />
-            <Analytics />
-            <SpeedInsights />
-          </UserDataProvider>
-        </div>
+        <UserDataProvider>
+          <Providers>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              {children}
+              <Footer />
+              <Analytics />
+              <SpeedInsights />
+            </div>
+          </Providers>
+        </UserDataProvider>
       </body>
     </html>
   );

@@ -26,37 +26,48 @@ export const UserDataProvider: React.FC<{ children: ReactNode }> = ({
     username: "",
   });
 
-  const createSession = async (payload: UserPayload) => {
+  const createSession = React.useCallback(async (payload: UserPayload) => {
     await createSessionCookie(payload);
-  };
+  }, []);
 
-  const destroySession = async () => {
+  const destroySession = React.useCallback(async () => {
     await destroySessionCookie();
-  };
+  }, []);
 
-  const fetchSession = async () => {
+  const fetchSession = React.useCallback(async () => {
     const session = await getSessionCookie();
 
     if (session) {
-      if (
-        userData.email !== session.email ||
-        userData.username !== session.username
-      ) {
-        setUserData({
-          email: session.email,
-          username: session.username,
-        });
-      }
+      setUserData((prev) => {
+        if (
+          prev.email !== session.email ||
+          prev.username !== session.username
+        ) {
+          return {
+            email: session.email,
+            username: session.username,
+          };
+        }
+        return prev;
+      });
     } else {
-      if (userData.email || userData.username) {
-        setUserData({ email: "", username: "" });
-      }
+      setUserData((prev) => {
+        if (prev.email || prev.username) {
+          return { email: "", username: "" };
+        }
+        return prev;
+      });
     }
-  };
+  }, []);
+
+  const value = React.useMemo(
+    () => ({ userData, createSession, destroySession, fetchSession }),
+    [userData, createSession, destroySession, fetchSession]
+  );
 
   return (
     <UserDataContext.Provider
-      value={{ userData, createSession, destroySession, fetchSession }}
+      value={value}
     >
       {children}
     </UserDataContext.Provider>

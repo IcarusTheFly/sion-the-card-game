@@ -12,6 +12,7 @@ export const loginService = async (email: string, password: string) => {
     const { rows } =
       await sql`SELECT username, email, password FROM users WHERE email = ${email} AND authorized = true`;
 
+    // console.log("The encrypted password is:", bcrypt.hashSync(password, 4));
     if (!rows.length || !bcrypt.compareSync(password, rows[0].password)) {
       result.data = null;
     } else {

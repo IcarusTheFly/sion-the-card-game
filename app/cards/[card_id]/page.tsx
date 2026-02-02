@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { use } from "react";
 import GetCardByColNumber from "../../db/GetCardByColNumber";
 import CardDetailsLoader from "./CardDetailsLoader";
 import CardDetailsNotFound from "./CardDetailsNotFound";
@@ -9,19 +10,21 @@ import CardDetailsView from "./CardDetailsView";
 export default function CardDetailsPage({
   params,
 }: {
-  params: { card_id: number };
+  params: Promise<{ card_id: number }>;
 }) {
   const [cardDetails, setCardDetails] = useState<CardTypeExtended>();
   const [cardLoading, setCardLoading] = useState<Boolean>(true);
+  
+  const unwrappedParams = use(params);
 
   useEffect(() => {
-    GetCardByColNumber(params.card_id).then((card) => {
+    GetCardByColNumber(unwrappedParams.card_id).then((card) => {
       if (card) {
         setCardDetails(card as CardTypeExtended);
       }
       setCardLoading(false);
     });
-  }, [params.card_id]);
+  }, [unwrappedParams.card_id]);
 
   return (
     <main className="bg-gray-900 text-white py-8 md:py-12 flex-grow">

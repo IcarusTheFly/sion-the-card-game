@@ -12,16 +12,17 @@ export default function CardsPage() {
 
   // TO-DO: Play with useMemo and useCallback
   useEffect(() => {
-    GetCards().then((cards) => {
-      setCardsRawList(cards as CardTypeExtended[]);
-      setIsLoading(false);
-    });
+    fetch("/api/cards", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((cards) => {
+        setCardsRawList(cards as CardTypeExtended[]);
+      })
+      .catch((error) => {
+        console.error("Failed to load cards:", error);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
-  const [cardList, setCardList] = useState(
-    cardsRawList.toSorted((a: CardTypeExtended, b: CardTypeExtended) =>
-      a.name.localeCompare(b.name)
-    )
-  );
+  const [cardList, setCardList] = useState<CardTypeExtended[]>([]);
 
   return (
     <main className="bg-gray-900 text-white flex-grow">

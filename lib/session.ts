@@ -17,14 +17,18 @@ const jwtEncrypt = async (data: any): Promise<any> => {
 };
 
 const jwtDecrypt = async (data: string): Promise<any> => {
-  const { payload } = await jwtVerify(data, SESSION_KEY, {
-    algorithms: [process.env.SESSION_ENCRYPTION_ALGORITHM || "HS256"],
-  });
-  return payload;
+  try {
+    const { payload } = await jwtVerify(data, SESSION_KEY, {
+      algorithms: [process.env.SESSION_ENCRYPTION_ALGORITHM || "HS256"],
+    });
+    return payload;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const getSessionCookie = async () => {
-  const session = cookies().get("session")?.value;
+  const session = (await cookies()).get("session")?.value;
   if (!session) {
     return null;
   }
@@ -35,14 +39,14 @@ export const createSessionCookie = async (payload: UserPayload) => {
   const expirationDate = new Date(Date.now() + COOKIE_EXPIRY_TIME);
   const session = await jwtEncrypt(payload);
 
-  cookies().set("session", session, {
+  (await cookies()).set("session", session, {
     expires: expirationDate,
     httpOnly: true,
   });
 };
 
 export const destroySessionCookie = async () => {
-  cookies().set("session", "", {
+  (await cookies()).set("session", "", {
     expires: new Date(0),
   });
 
@@ -56,6 +60,10 @@ export const updateSessionCookie = async (request: NextRequest) => {
   }
 
   const decryptedSession = await jwtDecrypt(session);
+  if (!decryptedSession) {
+    return;
+  }
+
   decryptedSession.expires = new Date(Date.now() + COOKIE_EXPIRY_TIME);
   const res = NextResponse.next();
   res.cookies.set("session", await jwtEncrypt(decryptedSession), {
